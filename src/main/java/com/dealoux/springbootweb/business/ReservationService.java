@@ -63,5 +63,46 @@ public class ReservationService {
         });
         return roomReservations;
     }
+
+    public List<Guest> getHotelGuests(){
+        Iterable<Guest> guests = this.guestRepository.findAll();
+        List<Guest> guestList = new ArrayList<>();
+        guests.forEach(guestList::add);
+        guestList.sort(new Comparator<Guest>() {
+            @Override
+            public int compare(Guest o1, Guest o2) {
+                int result = o1.getLastName().compareTo(o2.getLastName());
+
+                if(result == 0){
+                    result = o1.getFirstName().compareTo(o2.getFirstName());
+                }
+
+                return result;
+            }
+        });
+
+        return guestList;
+    }
+
+    public void addGuest(Guest guest){
+        if(guest == null){
+            throw new RuntimeException("Guest cannot be null");
+        }
+        this.guestRepository.save(guest);
+    }
+
+    public List<Room> getRooms(){
+        Iterable<Room> rooms = this.roomRepository.findAll();
+        List<Room> roomList = new ArrayList<>();
+        rooms.forEach(roomList::add);
+        roomList.sort(new Comparator<Room>() {
+            @Override
+            public int compare(Room o1, Room o2) {
+                return (int) (o1.getId()-o2.getId());
+            }
+        });
+
+        return roomList;
+    }
 }
 
