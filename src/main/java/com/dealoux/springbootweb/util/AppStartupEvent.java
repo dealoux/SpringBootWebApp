@@ -1,35 +1,28 @@
 package com.dealoux.springbootweb.util;
 
-import com.dealoux.springbootweb.data.Room;
-import com.dealoux.springbootweb.data.RoomRepository;
-import com.dealoux.springbootweb.data.Guest;
-import com.dealoux.springbootweb.data.GuestRepository;
-import com.dealoux.springbootweb.data.Reservation;
-import com.dealoux.springbootweb.data.ReservationRepository;
+import java.util.Date;
+import java.util.List;
 
+import com.dealoux.springbootweb.business.ReservationService;
+import com.dealoux.springbootweb.business.RoomReservation;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AppStartupEvent implements ApplicationListener<ApplicationReadyEvent> {
-    private final RoomRepository roomRepository;
-    private final GuestRepository guestRepository;
-    private final ReservationRepository reservationRepository;
+    private final ReservationService reservationService;
+    private final DateUtils dateUtils;
 
-    public AppStartupEvent(RoomRepository roomRepository, GuestRepository guestRepository, ReservationRepository reservationRepository) {
-        this.roomRepository = roomRepository;
-        this.guestRepository = guestRepository;
-        this.reservationRepository = reservationRepository;
+    public AppStartupEvent(ReservationService reservationService, DateUtils dateUtils) {
+        this.reservationService = reservationService;
+        this.dateUtils = dateUtils;
     }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        Iterable<Room> rooms = this.roomRepository.findAll();
-        rooms.forEach(System.out::println);
-        Iterable<Guest> guests = this.guestRepository.findAll();
-        guests.forEach(System.out::println);
-        Iterable<Reservation> reservations = this.reservationRepository.findAll();
+        Date date = this.dateUtils.createDateFromDateString("2023-09-02");
+        List<RoomReservation> reservations = this.reservationService.getRoomReservationsForDate(date);
         reservations.forEach(System.out::println);
     }
 }

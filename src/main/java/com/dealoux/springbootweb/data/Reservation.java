@@ -9,35 +9,35 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="RESERVATION_ID")
-    private long reservationID;
+    private long reservationId;
     @Column(name="ROOM_ID")
-    private String roomId;
+    private long roomId;
     @Column(name="GUEST_ID")
-    private String guestId;
+    private long guestId;
     @Column(name="RES_DATE")
     private Date reservationDate;
 
-    public long getReservationID() {
-        return reservationID;
+    public long getReservationId() {
+        return reservationId;
     }
 
-    public void setReservationID(long reservationID) {
-        this.reservationID = reservationID;
+    public void setReservationId(long reservationID) {
+        this.reservationId = reservationID;
     }
 
-    public String getRoomId() {
+    public long getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(String roomId) {
+    public void setRoomId(long roomId) {
         this.roomId = roomId;
     }
 
-    public String getGuestId() {
+    public long getGuestId() {
         return guestId;
     }
 
-    public void setGuestId(String guestId) {
+    public void setGuestId(long guestId) {
         this.guestId = guestId;
     }
 
@@ -52,7 +52,7 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-                "reservationID=" + reservationID +
+                "reservationID=" + reservationId +
                 ", roomId='" + roomId + '\'' +
                 ", guestId='" + guestId + '\'' +
                 ", reservationDate='" + reservationDate + '\'' +

@@ -8,7 +8,7 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="GUEST_ID")
-    private long guestID;
+    private long guestId;
     @Column(name="FIRST_NAME")
     private String firstName;
     @Column(name="LAST_NAME")
@@ -24,12 +24,12 @@ public class Guest {
     @Column(name="PHONE_NUMBER")
     private String phoneNumber;
 
-    public long getGuestID() {
-        return guestID;
+    public long getGuestId() {
+        return guestId;
     }
 
-    public void setGuestID(long guestID) {
-        this.guestID = guestID;
+    public void setGuestId(long guestID) {
+        this.guestId = guestID;
     }
 
     public String getFirstName() {
@@ -91,7 +91,7 @@ public class Guest {
     @Override
     public String toString() {
         return "Guest{" +
-                "guestID=" + guestID +
+                "guestID=" + guestId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
