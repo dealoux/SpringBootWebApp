@@ -6,11 +6,13 @@ services:
     container_name: db
     image: postgres
     restart: always
-    build:
-      dockerfile: db/Dockerfile
+#    build:
+#      dockerfile: db/Dockerfile
+    environment:
+      - POSTGRES_PASSWORD=postgres
     volumes:
-      - $HOME/docker/volumes/postgres:/var/lib/postgresql/
       - ./db/scripts/:/docker-entrypoint-initdb.d/
+      - $HOME/docker/volumes/postgres:/var/lib/postgresql/
     ports:
       - "5432:5432"
 
